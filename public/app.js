@@ -1,80 +1,14 @@
 /**
- * CyberTrust Nation - Frontend Application Logic
- * Principal Product Designer Standard
+ * AegisOS - Frontend Application Logic
+ * Autonomous Public Trust & Digital Defense
  */
 
 let chartsInitialized = false;
 let chartEmiratesInstance = null;
 let chartVectorsInstance = null;
 let chartProgressionInstance = null;
-
-// Pitch Deck Data (PDF Guidelines: 5 Slides, 3-minute presentation, speaker assignments)
-const PITCH_SLIDES = [
-  {
-    number: 1,
-    title: "1. The Problem: The Fragility of Digital Trust",
-    speaker: "Speaker 1: Problem & Impact",
-    timeSlot: "0:00 - 0:30",
-    bullets: [
-      "The UAE leads the world in digital government adoption (98%+ citizen engagement via TAMM, DubaiNow, UAE PASS).",
-      "However, sophisticated attacks threaten this foundation: a 38% rise in spoofed government SMS smishing and automated credential harvesting targeting residents.",
-      "A single high-profile critical infrastructure outage or citizen data scam undermines public confidence and risks millions in national economic disruption."
-    ],
-    highlight: "Core Challenge: How do we safeguard public trust while ensuring critical digital services remain 100% resilient against large-scale cyber incidents?"
-  },
-  {
-    number: 2,
-    title: "2. Our Solution: CyberTrust Nation Autonomous Ecosystem",
-    speaker: "Speaker 2: Solution & AI",
-    timeSlot: "0:30 - 1:15",
-    bullets: [
-      "Dual-Pillar Architecture: Citizen Trust Shield + Autonomous Critical Infrastructure Sentinel.",
-      "Citizen Trust Shield: Real-time NLP threat scanner cross-referencing official TDRA whitelists, exposing typosquatting, and providing verified official government portals.",
-      "Autonomous AI Agentic Defense: Multi-agent swarm (Threat Sentinel, Zero-Trust Token Invalidator, Auto-Healer) mitigating ransomware and volumetric DDoS in 1.4 seconds with zero citizen downtime."
-    ],
-    highlight: "Innovation: Moving from reactive human cybersecurity to sub-second autonomous agentic self-healing."
-  },
-  {
-    number: 3,
-    title: "3. Impact & Value Driven by UAE Open Data",
-    speaker: "Speaker 1: Impact & Data",
-    timeSlot: "1:15 - 2:00",
-    bullets: [
-      "Effective Use of Open Data: Live ingestion and visualization of Bayanat.ae / TDRA threat telemetry across all 7 Emirates.",
-      "Public Awareness at Scale: Proactive scam radar drills educating residents on deepfakes, SMS smishing, and QR code quishing.",
-      "Measurable Impact: Over 1.4 million threats deflected in 2026, elevating the National Digital Trust Index to an unprecedented 96.8%."
-    ],
-    highlight: "Outcome: Empowered citizens, zero credential loss, and complete transparency in national digital health."
-  },
-  {
-    number: 4,
-    title: "4. Solution Feasibility & Technical Architecture",
-    speaker: "Speaker 3: Feasibility & Closing",
-    timeSlot: "2:00 - 2:40",
-    bullets: [
-      "Production-Ready Architecture: Lightweight microVM containment, Anycast scrubbing, and native UAE PASS identity token attestation.",
-      "Securing Agentic AI: Built-in governance framework enforcing cryptographic attestations, strict blast-radius sandboxing, and human-in-the-loop overrides for autonomous agents.",
-      "Business Model Canvas (BMC): Scalable national SaaS and public security infrastructure aligned with UAE Cyber Security Council standards."
-    ],
-    highlight: "Feasibility: Zero new hardware required; integrates seamlessly with existing FedNet and TDRA infrastructure."
-  },
-  {
-    number: 5,
-    title: "5. Closing: Building the World's Most Cyber-Secure Nation",
-    speaker: "Speaker 3: Feasibility & Closing",
-    timeSlot: "2:40 - 3:00",
-    bullets: [
-      "Directly embodies the UAE National Cybersecurity Strategy 2025–2031 vision.",
-      "Bridges the gap between technical infrastructure resilience and everyday citizen trust.",
-      "Join us in transforming cyber defense into an autonomous, transparent, and resilient national shield."
-    ],
-    highlight: "Call to Action: Protecting every citizen, securing every service, elevating national trust."
-  }
-];
-
-let currentSlideIndex = 0;
-let pitchTimerInterval = null;
-let pitchTimeRemaining = 180;
+let lastScanResult = null;
+let lastDispatchReceipt = null;
 
 document.addEventListener("DOMContentLoaded", () => {
   setupNavigation();
@@ -83,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupOpenData();
   setupAgentGuard();
   setupAcademy();
-  setupPitchModal();
+  setupDispatchesFeed();
 });
 
 // --- 1. Tab Navigation ---
@@ -113,7 +47,39 @@ function setupNavigation() {
   });
 }
 
-// --- 2. Scanner Module ---
+// --- 2. Live Incident Feed in Right-Hand Panel ---
+async function setupDispatchesFeed() {
+  const container = document.getElementById("dispatchesList");
+  try {
+    const res = await fetch("/api/dispatches");
+    const data = await res.json();
+    if (!data || !data.dispatches) return;
+
+    container.innerHTML = "";
+    data.dispatches.forEach(item => {
+      const row = document.createElement("div");
+      row.className = "p-2.5 rounded surface-inset border border-white/[0.04] space-y-1 hover:border-white/[0.08] transition";
+      row.innerHTML = `
+        <div class="flex items-center justify-between">
+          <span class="font-bold text-slate-200">${item.ticketId}</span>
+          <span class="text-[10px] text-slate-500">${item.timestamp}</span>
+        </div>
+        <div class="text-[11px] text-slate-400 line-clamp-1">
+          <span class="text-brand">${item.targetBrand}:</span> ${item.evidenceDomain}
+        </div>
+        <div class="flex items-center justify-between text-[10px] pt-1 border-t border-white/[0.03]">
+          <span class="text-slate-500 font-mono">Hash: ${item.hash}</span>
+          <span class="text-slate-400">${item.status}</span>
+        </div>
+      `;
+      container.appendChild(row);
+    });
+  } catch (err) {
+    console.error("Failed to load dispatches feed:", err);
+  }
+}
+
+// --- 3. Scanner Module & Interactive Dispatch ---
 function setupScanner() {
   const scanInput = document.getElementById("scanInput");
   const btnScan = document.getElementById("btnScan");
@@ -128,6 +94,15 @@ function setupScanner() {
   const officialName = document.getElementById("resOfficialName");
   const officialUrl = document.getElementById("resOfficialUrl");
   const btnReport = document.getElementById("btnReportIncident");
+
+  // Dispatch Terminal Modal elements
+  const dispatchModal = document.getElementById("dispatchModal");
+  const btnCloseDispatch = document.getElementById("btnCloseDispatch");
+  const terminalLogs = document.getElementById("dispatchTerminalLogs");
+  const actionGrid = document.getElementById("dispatchActionGrid");
+  const receiptBox = document.getElementById("dispatchReceiptBox");
+  const caseIdDisplay = document.getElementById("dispatchCaseId");
+  const btnDownloadReceipt = document.getElementById("btnDownloadReceipt");
 
   const presets = {
     epost: "Emirates Post: Your parcel AED-9021 delivery fee of AED 12.50 is unpaid. Click epst-uae-track.biz/pay immediately to avoid return.",
@@ -150,6 +125,7 @@ function setupScanner() {
     scanInput.value = "";
     placeholder.classList.remove("hidden");
     resultContainer.classList.add("hidden");
+    lastScanResult = null;
   });
 
   btnScan.addEventListener("click", () => {
@@ -173,6 +149,7 @@ function setupScanner() {
         body: JSON.stringify({ text })
       });
       const data = await res.json();
+      lastScanResult = data;
       renderScanResult(data);
     } catch (err) {
       console.error(err);
@@ -193,14 +170,17 @@ function setupScanner() {
       verdictBadge.textContent = "VERIFIED OFFICIAL ENTITY";
       verdictBadge.className = "px-2.5 py-1 rounded text-xs font-mono font-bold tracking-wider uppercase bg-emerald-950/80 border border-emerald-700 text-emerald-300";
       riskScore.className = "font-display text-2xl font-bold font-mono text-emerald-400";
+      btnReport.classList.add("hidden");
     } else if (data.verdict === "CRITICAL_THREAT") {
       verdictBadge.textContent = "CRITICAL PHISHING THREAT";
       verdictBadge.className = "px-2.5 py-1 rounded text-xs font-mono font-bold tracking-wider uppercase bg-rose-950/80 border border-rose-800 text-rose-300";
       riskScore.className = "font-display text-2xl font-bold font-mono text-signalCrit";
+      btnReport.classList.remove("hidden");
     } else {
       verdictBadge.textContent = "SUSPICIOUS ANOMALY";
       verdictBadge.className = "px-2.5 py-1 rounded text-xs font-mono font-bold tracking-wider uppercase bg-amber-950/80 border border-amber-800 text-amber-300";
       riskScore.className = "font-display text-2xl font-bold font-mono text-signalWarn";
+      btnReport.classList.remove("hidden");
     }
 
     flagsList.innerHTML = "";
@@ -225,29 +205,95 @@ function setupScanner() {
     } else {
       officialBox.classList.add("hidden");
     }
-
-    btnReport.onclick = async () => {
-      btnReport.disabled = true;
-      btnReport.innerHTML = `<span>DISPATCHING TELEMETRY...</span>`;
-      try {
-        await fetch("/api/report-scam", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            text: scanInput.value,
-            type: data.brandSpoofed || "Phishing Scam",
-            emirate: "Abu Dhabi / Dubai"
-          })
-        });
-        btnReport.innerHTML = `<span class="text-brand font-mono">✓ TELEMETRY LOGGED WITH NATIONAL eCRIME (${data.reportToken})</span>`;
-      } catch (err) {
-        console.error(err);
-      }
-    };
   }
+
+  // DISPATCH FORENSIC TELEMETRY & TRIGGER SINKHOLE
+  btnReport.addEventListener("click", async () => {
+    dispatchModal.classList.remove("hidden");
+    terminalLogs.innerHTML = "";
+    actionGrid.classList.add("hidden");
+    receiptBox.classList.add("hidden");
+
+    function addLog(msg, color = "text-slate-300") {
+      const p = document.createElement("div");
+      p.className = `${color} leading-relaxed`;
+      p.innerHTML = `<span class="text-slate-600">[${new Date().toLocaleTimeString()}]</span> ${msg}`;
+      terminalLogs.appendChild(p);
+      terminalLogs.scrollTop = terminalLogs.scrollHeight;
+    }
+
+    addLog("Initializing secure forensic payload packaging...", "text-brand");
+
+    try {
+      setTimeout(() => {
+        addLog("Generating SHA-256 evidence fingerprint & timestamp signature...", "text-slate-400");
+      }, 250);
+
+      setTimeout(() => {
+        addLog("Performing mTLS handshake with National Incident Gateway...", "text-slate-400");
+      }, 500);
+
+      const res = await fetch("/api/report-scam", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          text: scanInput.value,
+          type: (lastScanResult && lastScanResult.brandSpoofed) || "Deceptive Smishing",
+          riskScore: (lastScanResult && lastScanResult.riskScore) || 85,
+          brandSpoofed: (lastScanResult && lastScanResult.brandSpoofed) || "Government Entity"
+        })
+      });
+
+      const data = await res.json();
+      lastDispatchReceipt = data;
+
+      setTimeout(() => {
+        addLog(`Fingerprint confirmed: SHA-256 // ${data.evidenceHash}`, "text-slate-300");
+        addLog("Injecting DNS blackhole rule into national recursive resolvers...", "text-slate-300");
+      }, 850);
+
+      setTimeout(() => {
+        addLog("Distributing SMS regex signature to e& and du core gateway scrubbers...", "text-slate-300");
+      }, 1200);
+
+      setTimeout(() => {
+        addLog(`SUCCESS: Case filed. Incident Reference: #${data.ticketId}`, "text-brand font-bold");
+        caseIdDisplay.textContent = data.ticketId;
+        actionGrid.classList.remove("hidden");
+        receiptBox.classList.remove("hidden");
+        setupDispatchesFeed(); // Refresh live table
+      }, 1500);
+
+    } catch (err) {
+      console.error(err);
+      addLog("ERROR: Connection timeout during gateway dispatch.", "text-rose-400");
+    }
+  });
+
+  btnCloseDispatch.addEventListener("click", () => {
+    dispatchModal.classList.add("hidden");
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !dispatchModal.classList.contains("hidden")) {
+      dispatchModal.classList.add("hidden");
+    }
+  });
+
+  // Download Evidence JSON
+  btnDownloadReceipt.addEventListener("click", () => {
+    if (!lastDispatchReceipt) return;
+    const blob = new Blob([JSON.stringify(lastDispatchReceipt, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `AegisOS_${lastDispatchReceipt.ticketId}_Forensic_Evidence.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  });
 }
 
-// --- 3. Critical Infrastructure Resilience ---
+// --- 4. Critical Infrastructure Resilience ---
 function setupResilience() {
   const sectorGrid = document.getElementById("sectorGrid");
   const drillSelect = document.getElementById("drillPresetSelect");
@@ -338,7 +384,7 @@ function setupResilience() {
   });
 }
 
-// --- 4. Open Data Charts ---
+// --- 5. Open Data Charts ---
 async function setupOpenData() {}
 
 async function initCharts() {
@@ -348,7 +394,6 @@ async function initCharts() {
     const data = await res.json();
     if (!data) return;
 
-    // Emirates Bar Chart (Deliberate high-contrast palette)
     const ctxEmirates = document.getElementById("chartEmirates").getContext("2d");
     if (chartEmiratesInstance) chartEmiratesInstance.destroy();
     chartEmiratesInstance = new Chart(ctxEmirates, {
@@ -374,7 +419,6 @@ async function initCharts() {
       }
     });
 
-    // Threat Vectors Doughnut Chart
     const ctxVectors = document.getElementById("chartVectors").getContext("2d");
     if (chartVectorsInstance) chartVectorsInstance.destroy();
     chartVectorsInstance = new Chart(ctxVectors, {
@@ -400,7 +444,6 @@ async function initCharts() {
       }
     });
 
-    // Trust Progression Line Chart
     const ctxProg = document.getElementById("chartProgression").getContext("2d");
     if (chartProgressionInstance) chartProgressionInstance.destroy();
     chartProgressionInstance = new Chart(ctxProg, {
@@ -434,7 +477,7 @@ async function initCharts() {
   }
 }
 
-// --- 5. Securing Agentic AI ---
+// --- 6. Securing Agentic AI ---
 async function setupAgentGuard() {
   const container = document.getElementById("agentRegistryGrid");
   try {
@@ -467,7 +510,7 @@ async function setupAgentGuard() {
   }
 }
 
-// --- 6. Resident Cyber Drills ---
+// --- 7. Resident Cyber Drills ---
 function setupAcademy() {
   document.querySelectorAll(".quiz-choice-btn").forEach(btn => {
     btn.addEventListener("click", () => {
@@ -478,116 +521,11 @@ function setupAcademy() {
       feedback.classList.remove("hidden");
       if (isCorrect) {
         feedback.className = "quiz-feedback text-xs font-mono p-3 rounded surface-inset border border-emerald-800 text-emerald-300";
-        feedback.textContent = "✓ CORRECT DECISION: Verified safe protocol. Official UAE bodies never solicit credentials over untrusted channels.";
+        feedback.textContent = "✓ CORRECT DECISION: Verified safe protocol. Official bodies never solicit credentials over untrusted channels.";
       } else {
         feedback.className = "quiz-feedback text-xs font-mono p-3 rounded surface-inset border border-rose-800 text-rose-300";
         feedback.textContent = "✗ CRITICAL RISK: Answering exposes identity and card details to adversaries.";
       }
     });
   });
-}
-
-// --- 7. Pitch Deck Modal & Timer ---
-function setupPitchModal() {
-  const modal = document.getElementById("pitchModal");
-  const btnOpen = document.getElementById("btnOpenPitch");
-  const btnClose = document.getElementById("btnClosePitch");
-
-  const slideViewport = document.getElementById("slideViewport");
-  const slideIndicator = document.getElementById("slideIndicator");
-  const btnPrev = document.getElementById("btnPrevSlide");
-  const btnNext = document.getElementById("btnNextSlide");
-
-  const timerDisplay = document.getElementById("pitchTimer");
-  const btnToggleTimer = document.getElementById("btnToggleTimer");
-  const btnResetTimer = document.getElementById("btnResetTimer");
-
-  btnOpen.addEventListener("click", () => {
-    modal.classList.remove("hidden");
-    renderCurrentSlide();
-  });
-
-  btnClose.addEventListener("click", () => {
-    modal.classList.add("hidden");
-    clearInterval(pitchTimerInterval);
-    pitchTimerInterval = null;
-    btnToggleTimer.textContent = "Start Timer";
-  });
-
-  // ESC key to close modal
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && !modal.classList.contains("hidden")) {
-      modal.classList.add("hidden");
-    }
-  });
-
-  btnPrev.addEventListener("click", () => {
-    if (currentSlideIndex > 0) {
-      currentSlideIndex--;
-      renderCurrentSlide();
-    }
-  });
-
-  btnNext.addEventListener("click", () => {
-    if (currentSlideIndex < PITCH_SLIDES.length - 1) {
-      currentSlideIndex++;
-      renderCurrentSlide();
-    }
-  });
-
-  function renderCurrentSlide() {
-    const s = PITCH_SLIDES[currentSlideIndex];
-    slideIndicator.textContent = `SLIDE ${s.number} OF 5`;
-
-    slideViewport.innerHTML = `
-      <div class="space-y-4">
-        <div class="flex items-center justify-between border-b border-white/[0.08] pb-2">
-          <span class="text-xs font-mono font-bold text-brand uppercase">${s.speaker}</span>
-          <span class="text-xs font-mono text-slate-500">${s.timeSlot}</span>
-        </div>
-        <h3 class="font-display text-2xl font-bold text-white tracking-tight">${s.title}</h3>
-        <ul class="space-y-2 text-sm text-slate-300 font-body">
-          ${s.bullets.map(b => `<li class="flex items-start gap-2.5"><span class="text-brand font-mono font-bold">▸</span><span>${b}</span></li>`).join("")}
-        </ul>
-      </div>
-      <div class="mt-6 p-3.5 rounded surface-inset border border-white/[0.08] text-xs font-mono text-slate-400">
-        <strong class="text-white">STRATEGIC TAKEAWAY:</strong> ${s.highlight}
-      </div>
-    `;
-  }
-
-  btnToggleTimer.addEventListener("click", () => {
-    if (pitchTimerInterval) {
-      clearInterval(pitchTimerInterval);
-      pitchTimerInterval = null;
-      btnToggleTimer.textContent = "Resume Timer";
-    } else {
-      btnToggleTimer.textContent = "Pause Timer";
-      pitchTimerInterval = setInterval(() => {
-        if (pitchTimeRemaining > 0) {
-          pitchTimeRemaining--;
-          updateTimerDisplay();
-        } else {
-          clearInterval(pitchTimerInterval);
-          pitchTimerInterval = null;
-          timerDisplay.textContent = "00:00 (TIME)";
-          btnToggleTimer.textContent = "Finished";
-        }
-      }, 1000);
-    }
-  });
-
-  btnResetTimer.addEventListener("click", () => {
-    clearInterval(pitchTimerInterval);
-    pitchTimerInterval = null;
-    pitchTimeRemaining = 180;
-    updateTimerDisplay();
-    btnToggleTimer.textContent = "Start Timer";
-  });
-
-  function updateTimerDisplay() {
-    const mins = Math.floor(pitchTimeRemaining / 60).toString().padStart(2, "0");
-    const secs = (pitchTimeRemaining % 60).toString().padStart(2, "0");
-    timerDisplay.textContent = `${mins}:${secs}`;
-  }
 }
