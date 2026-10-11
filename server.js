@@ -1,12 +1,13 @@
 /**
- * AmanNation (أمان الوطن) - Backend Server
- * UAE Hackathon 2026 - Theme 4: Digital Trust & Cyber-Secure Nation
+ * AegisOS - Backend Server
+ * Autonomous National Digital Verification & Critical Infrastructure Resilience Platform
  */
 
 const express = require("express");
 const path = require("path");
+const crypto = require("crypto");
 const { analyzeContent } = require("./services/scannerService");
-const { getSectorTelemetry, simulateIncident, INCIDENT_PRESETS } = require("./services/resilienceEngine");
+const { getSectorTelemetry, simulateIncident } = require("./services/resilienceEngine");
 const { getOpenData, exportCsv } = require("./services/openDataService");
 
 const app = express();
@@ -15,37 +16,41 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
-// In-memory reported scams for live community telemetry
-const communityReports = [
+// Live Telemetry Community Dispatches
+const liveDispatches = [
   {
-    id: "REP-9921",
-    timestamp: new Date(Date.now() - 1000 * 60 * 14).toISOString(),
+    ticketId: "INC-8941",
+    timestamp: new Date(Date.now() - 1000 * 60 * 12).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     type: "SMS Smishing",
-    content: "Emirates Post: Unpaid delivery fee of AED 12.50. Click epst-uae-track.biz/pay",
-    status: "Verified Malicious - Blocked by TDRA",
-    reportedFrom: "Dubai"
+    targetBrand: "Emirates Post",
+    evidenceDomain: "epst-uae-track.biz",
+    riskScore: 90,
+    status: "DNS Sinkholed (TDRA)",
+    hash: "a4f89c02...e319"
   },
   {
-    id: "REP-9922",
-    timestamp: new Date(Date.now() - 1000 * 60 * 38).toISOString(),
-    type: "Traffic Fine Spoof",
-    content: "Dubai Police alert: Final warning for overdue fine. dubaipolice-portal.net/fines",
-    status: "Verified Malicious - IP Blacklisted",
-    reportedFrom: "Abu Dhabi"
+    ticketId: "INC-8940",
+    timestamp: new Date(Date.now() - 1000 * 60 * 28).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+    type: "Spoofed Gov Fine",
+    targetBrand: "Dubai Police",
+    evidenceDomain: "dubaipolice-portal.net",
+    riskScore: 85,
+    status: "Carrier Filter Deployed",
+    hash: "7b2e11d9...f402"
   },
   {
-    id: "REP-9923",
-    timestamp: new Date(Date.now() - 1000 * 60 * 85).toISOString(),
-    type: "Banking Impersonation",
-    content: "Central Bank of UAE: Urgent update your Emirates ID card to prevent card freeze",
+    ticketId: "INC-8939",
+    timestamp: new Date(Date.now() - 1000 * 60 * 65).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+    type: "Credential Harvester",
+    targetBrand: "Central Bank of UAE",
+    evidenceDomain: "cbu-security-verification.org",
+    riskScore: 95,
     status: "Under Forensic Inspection",
-    reportedFrom: "Sharjah"
+    hash: "99cb3401...88a2"
   }
 ];
 
-// --- API Endpoints ---
-
-// 1. Phishing & Scam Scanner Endpoint
+// 1. Phishing & Scan Inspection
 app.post("/api/scan", (req, res) => {
   try {
     const { text } = req.body;
@@ -59,24 +64,24 @@ app.post("/api/scan", (req, res) => {
   }
 });
 
-// 2. Critical Infrastructure Sector Telemetry
+// 2. Critical Infrastructure Telemetry
 app.get("/api/infrastructure", (req, res) => {
   const telemetry = getSectorTelemetry();
   res.json({
     timestamp: new Date().toISOString(),
-    nationalReadinessLevel: "ALPHA-PROTECTED",
+    posture: "ACTIVE-DEFENDING",
     sectors: telemetry
   });
 });
 
-// 3. Autonomous Incident Simulation Endpoint
+// 3. Autonomous Incident Simulation
 app.post("/api/simulate-incident", (req, res) => {
   const { preset } = req.body;
   const drillResult = simulateIncident(preset);
   res.json(drillResult);
 });
 
-// 4. UAE Open Data (Bayanat.ae) Telemetry
+// 4. Open Data Telemetry
 app.get("/api/opendata", (req, res) => {
   const data = getOpenData();
   res.json(data);
@@ -86,34 +91,65 @@ app.get("/api/opendata", (req, res) => {
 app.get("/api/opendata/csv", (req, res) => {
   const csv = exportCsv();
   res.setHeader("Content-Type", "text/csv");
-  res.setHeader("Content-Disposition", 'attachment; filename="UAE_Cyber_OpenData_2026.csv"');
+  res.setHeader("Content-Disposition", 'attachment; filename="National_Cyber_Telemetry_2026.csv"');
   res.send(csv);
 });
 
-// 6. Report Scam (Community Watch)
+// 6. Report & Incident Dispatch API
 app.post("/api/report-scam", (req, res) => {
-  const { text, type, emirate } = req.body;
-  const newReport = {
-    id: `REP-${Math.floor(1000 + Math.random() * 9000)}`,
-    timestamp: new Date().toISOString(),
-    type: type || "Suspicious Message / Link",
-    content: text ? text.substring(0, 100) : "Unspecified submission",
-    status: "Dispatched to UAE eCrime & TDRA National Honeynet",
-    reportedFrom: emirate || "United Arab Emirates"
+  const { text, type, riskScore, brandSpoofed } = req.body;
+  const ticketId = `INC-${Math.floor(8950 + Math.random() * 900)}`;
+  const hash = crypto.createHash("sha256").update(text || "telemetry").digest("hex").substring(0, 16);
+  
+  let domain = "unspecified";
+  try {
+    const match = text.match(/(https?:\/\/[^\s]+)/i);
+    if (match) {
+      domain = new URL(match[0].startsWith("http") ? match[0] : `https://${match[0]}`).hostname;
+    }
+  } catch (e) {
+    domain = text.substring(0, 24);
+  }
+
+  const dispatchRecord = {
+    ticketId,
+    timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+    type: type || "Deceptive Smishing",
+    targetBrand: brandSpoofed || "Government Service",
+    evidenceDomain: domain,
+    riskScore: riskScore || 85,
+    status: "Sinkhole Sync Active",
+    hash: `${hash.substring(0, 8)}...${hash.substring(8, 12)}`
   };
-  communityReports.unshift(newReport);
-  res.json({ success: true, report: newReport, totalReports: communityReports.length });
+
+  liveDispatches.unshift(dispatchRecord);
+  if (liveDispatches.length > 8) liveDispatches.pop();
+
+  res.json({
+    success: true,
+    ticketId,
+    evidenceHash: hash,
+    timestamp: new Date().toISOString(),
+    status: "DISPATCHED_TO_NATIONAL_HONEYNET",
+    mitigationActions: [
+      { action: "DNS Sinkhole", detail: `Injected ${domain} into national recursive resolvers.` },
+      { action: "Carrier Filter Rule", detail: "SMS payload pattern pushed to e& and du upstream scrubbers." },
+      { action: "Registry Escalation", detail: "Abuse notice queued to registrar and upstream hosting provider." },
+      { action: "Public Alert Signal", detail: "Pattern indexed in community scam radar feed." }
+    ],
+    record: dispatchRecord
+  });
 });
 
-app.get("/api/reports", (req, res) => {
-  res.json({ reports: communityReports.slice(0, 10) });
+app.get("/api/dispatches", (req, res) => {
+  res.json({ dispatches: liveDispatches });
 });
 
-// 7. Agentic AI Security & Identity Framework
+// 7. Agentic AI Governance Framework
 app.get("/api/agentic-ai-framework", (req, res) => {
   res.json({
-    frameworkName: "Aman-AgentGuard v1.4",
-    standard: "UAE National Cybersecurity Strategy 2025-2031 (Agentic Governance)",
+    frameworkName: "Aegis-AgentEnclave v2.4",
+    standard: "Federal Autonomous AI Governance Standard",
     registeredAgents: [
       {
         id: "AGT-TAMM-09",
@@ -128,7 +164,7 @@ app.get("/api/agentic-ai-framework", (req, res) => {
         id: "AGT-FIN-04",
         name: "Financial Clearing Settlement Agent",
         authority: "SCA / Securities & Commodities Authority",
-        cryptographicAttestation: "0x33e1a...f881 [VALID HARDWARE ENCLAVE]",
+        cryptographicAttestation: "0x33e1a...f881 [HARDWARE ENCLAVE]",
         privilegeTier: "Level 4 (Transaction Settlement with Multi-Sig)",
         sandboxBoundary: "Double-blind Cryptographic Audit, Max Spend AED 50,000 auto-cap",
         status: "ACTIVE_AUTHENTICATED"
@@ -137,24 +173,17 @@ app.get("/api/agentic-ai-framework", (req, res) => {
         id: "AGT-HEALTH-02",
         name: "Unified Patient Record Sync Agent",
         authority: "MOHAP (Ministry of Health)",
-        cryptographicAttestation: "0x55bc2...a901 [VALID ZERO-KNOWLEDGE PROOF]",
+        cryptographicAttestation: "0x55bc2...a901 [ZERO-KNOWLEDGE PROOF]",
         privilegeTier: "Level 3 (Differential Privacy Anonymizer)",
-        sandboxBoundary: "HIPAA/UAE Health Data Law Compliant, Zero-Exfiltration Rule",
+        sandboxBoundary: "UAE Health Data Law Compliant, Zero-Exfiltration Rule",
         status: "ACTIVE_AUTHENTICATED"
       }
-    ],
-    guardrailPolicies: [
-      { rule: "Identity Attestation", desc: "Every autonomous AI agent must present verifiable cryptographic identity before invoking any federal API." },
-      { rule: "Strict Blast-Radius Isolation", desc: "Agents run in ephemeral sub-second microVMs with immutable file systems." },
-      { rule: "Human-in-the-Loop Override", desc: "Privileged operations exceeding sensitivity threshold require biometric UAE PASS sign-off." },
-      { rule: "Adversarial Prompt Shield", desc: "Real-time semantic vector filtering intercepts prompt injection, jailbreaks, and indirect data leaks." }
     ]
   });
 });
 
 app.listen(PORT, () => {
   console.log(`=======================================================`);
-  console.log(`🇦🇪 AmanNation CyberTrust Platform running on http://localhost:${PORT}`);
-  console.log(`UAE Hackathon 2026 - Theme: Digital Trust & Cyber-Secure Nation`);
+  console.log(`AegisOS Platform running on http://localhost:${PORT}`);
   console.log(`=======================================================`);
 });
