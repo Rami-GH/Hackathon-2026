@@ -1,0 +1,181 @@
+{
+  "metadata": {
+    "title": "UAE National Cyber Threat & Digital Trust Telemetry 2026",
+    "title_ar": "المؤشرات الوطنية للتهديدات السيبرانية والثقة الرقمية بدولة الإمارات 2026",
+    "source": "Bayanat.ae (Official UAE Open Data Portal)",
+    "publishing_entity": "Telecommunications and Digital Government Regulatory Authority (TDRA) & UAE Cybersecurity Council",
+    "publishing_entity_ar": "هيئة تنظيم الاتصالات والحكومة الرقمية ومجلس الأمن السيبراني",
+    "dataset_id": "BAYANAT-CSC-CYBERTRUST-2026",
+    "license": "UAE Open Government License",
+    "frequency": "Quarterly Telemetry & Real-Time Aggregation",
+    "last_updated": "2026-10-01"
+  },
+  "national_kpis": {
+    "total_threats_deflected_2026": 1425890,
+    "public_digital_trust_index": 96.8,
+    "critical_services_uptime": 99.994,
+    "ai_incident_mitigation_speed_sec": 1.42,
+    "citizen_awareness_adoption_rate": 84.3
+  },
+  "emirates_telemetry": [
+    {
+      "emirate": "Abu Dhabi",
+      "emirate_ar": "أبوظبي",
+      "digital_gov_services_monitored": 184,
+      "threats_mitigated": 482100,
+      "trust_score": 97.4,
+      "top_vector": "Credential Phishing / Impersonation",
+      "active_sentinels": 24
+    },
+    {
+      "emirate": "Dubai",
+      "emirate_ar": "دبي",
+      "digital_gov_services_monitored": 210,
+      "threats_mitigated": 541300,
+      "trust_score": 98.1,
+      "top_vector": "SMS Smishing & Fake Payment Gateways",
+      "active_sentinels": 30
+    },
+    {
+      "emirate": "Sharjah",
+      "emirate_ar": "الشارقة",
+      "digital_gov_services_monitored": 96,
+      "threats_mitigated": 182400,
+      "trust_score": 95.8,
+      "top_vector": "E-Commerce Fraud & Quishing",
+      "active_sentinels": 14
+    },
+    {
+      "emirate": "Ajman",
+      "emirate_ar": "عجمان",
+      "digital_gov_services_monitored": 58,
+      "threats_mitigated": 84200,
+      "trust_score": 94.9,
+      "top_vector": "Smishing & Spoofed Portals",
+      "active_sentinels": 8
+    },
+    {
+      "emirate": "Ras Al Khaimah",
+      "emirate_ar": "رأس الخيمة",
+      "digital_gov_services_monitored": 64,
+      "threats_mitigated": 72900,
+      "trust_score": 95.2,
+      "top_vector": "Ransomware / Supply Chain Anomaly",
+      "active_sentinels": 9
+    },
+    {
+      "emirate": "Fujairah",
+      "emirate_ar": "الفجيرة",
+      "digital_gov_services_monitored": 48,
+      "threats_mitigated": 39400,
+      "trust_score": 94.7,
+      "top_vector": "Phishing & Fake Invoices",
+      "active_sentinels": 6
+    },
+    {
+      "emirate": "Umm Al Quwain",
+      "emirate_ar": "أم القيوين",
+      "digital_gov_services_monitored": 36,
+      "threats_mitigated": 23590,
+      "trust_score": 95.0,
+      "top_vector": "Social Engineering Attacks",
+      "active_sentinels": 5
+    }
+  ],
+  "threat_vectors_distribution": [
+    {
+      "name": "SMS Smishing & Fake Delivery Alerts",
+      "name_ar": "التصيد عبر الرسائل القصيرة وإشعارات الطرود الزائفة",
+      "percentage": 38.5,
+      "typical_target": "Emirates Post / Delivery Services",
+      "severity": "High"
+    },
+    {
+      "name": "Spoofed Government & Police Portals",
+      "name_ar": "المواقع الحكومية والشرطية المزيفة",
+      "percentage": 24.2,
+      "typical_target": "Traffic Fines / Court Summons / TAMM clones",
+      "severity": "Critical"
+    },
+    {
+      "name": "Banking & Central Bank Impersonation",
+      "name_ar": "انتحال البنوك والمصرف المركزي",
+      "percentage": 18.3,
+      "typical_target": "Account Update & Emirates ID Re-verification",
+      "severity": "Critical"
+    },
+    {
+      "name": "DDoS on Public API Gateways",
+      "name_ar": "هجمات حجب الخدمة على بوابات الربط الرقمي",
+      "percentage": 11.4,
+      "typical_target": "Critical Infrastructure & Utilities",
+      "severity": "High"
+    },
+    {
+      "name": "AI Voice Deepfakes & Social Engineering",
+      "name_ar": "التزييف الصوتي بالذكاء الاصطناعي والهندسة الاجتماعية",
+      "percentage": 7.6,
+      "typical_target": "Executive Impersonation & VIPs",
+      "severity": "Elevated"
+    }
+  ],
+  "historical_trust_progression": [
+    { "year": 2022, "trust_index": 78.4, "incident_response_min": 42.0 },
+    { "year": 2023, "trust_index": 84.1, "incident_response_min": 25.5 },
+    { "year": 2024, "trust_index": 89.2, "incident_response_min": 12.0 },
+    { "year": 2025, "trust_index": 93.6, "incident_response_min": 3.8 },
+    { "year": 2026, "trust_index": 96.8, "incident_response_min": 0.024 }
+  ],
+  "sectors_status": [
+    {
+      "id": "telecom",
+      "name": "Telecom & Digital Backbone",
+      "name_ar": "قطاع الاتصالات والعمود الفقري الرقمي",
+      "governing_body": "TDRA (e& / du)",
+      "uptime": "99.998%",
+      "status": "Optimal",
+      "active_nodes": 128,
+      "avg_latency_ms": 4.2
+    },
+    {
+      "id": "gov_services",
+      "name": "Digital Government Portals",
+      "name_ar": "بوابات الخدمات الحكومية الرقمية",
+      "governing_body": "Federal FedNet / TAMM / DubaiNow / ICP",
+      "uptime": "99.992%",
+      "status": "Optimal",
+      "active_nodes": 340,
+      "avg_latency_ms": 6.8
+    },
+    {
+      "id": "financial",
+      "name": "Financial Markets & Banking",
+      "name_ar": "الأسواق المالية والقطاع المصرفي",
+      "governing_body": "CBUAE / SCA / ADX / DFM",
+      "uptime": "99.999%",
+      "status": "Monitored",
+      "active_nodes": 215,
+      "avg_latency_ms": 2.1
+    },
+    {
+      "id": "energy",
+      "name": "Energy, Water & Utilities",
+      "name_ar": "الطاقة والمياه والمرافق الحيوية",
+      "governing_body": "DEWA / TAQA / EWEC",
+      "uptime": "100.0%",
+      "status": "Optimal",
+      "active_nodes": 94,
+      "avg_latency_ms": 8.5
+    },
+    {
+      "id": "transport",
+      "name": "Transport & National Logistics",
+      "name_ar": "النقل واللوجستيات الوطنية",
+      "governing_body": "RTA / Etihad Rail / Emirates Post",
+      "uptime": "99.989%",
+      "status": "Optimal",
+      "active_nodes": 82,
+      "avg_latency_ms": 9.1
+    }
+  ]
+}
