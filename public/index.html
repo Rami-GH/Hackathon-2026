@@ -3,351 +3,371 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CyberTrust Nation - Digital Trust & Cyber-Secure Ecosystem</title>
+  <title>CyberTrust Nation — UAE National Digital Trust Platform</title>
   <link rel="stylesheet" href="styles.css">
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            cyberDark: '#070B14',
-            cyberCard: 'rgba(14, 22, 38, 0.8)',
-            cyberEmerald: '#10B981',
-            cyberCyan: '#06B6D4',
-            cyberGold: '#F59E0B',
-            cyberDanger: '#EF4444'
+            canvas: '#090D15',
+            surface: '#0E1422',
+            elevated: '#131B2E',
+            inset: '#06090F',
+            brand: '#10B981',
+            brandMuted: '#059669',
+            signalCrit: '#E11D48',
+            signalWarn: '#D97706'
+          },
+          fontFamily: {
+            display: ['"Space Grotesk"', 'sans-serif'],
+            body: ['"IBM Plex Sans"', 'sans-serif'],
+            mono: ['"IBM Plex Mono"', 'monospace']
           }
         }
       }
     }
   </script>
 </head>
-<body class="bg-cyberDark text-slate-100 min-h-screen">
+<body class="bg-canvas text-slate-100 min-h-screen relative font-body selection:bg-brand selection:text-slate-950">
 
-  <!-- Top Header Navigation -->
-  <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+  <!-- ==================== INSTITUTIONAL MASTHEAD ==================== -->
+  <header class="border-b border-white/[0.07] bg-surface/90 backdrop-blur-md sticky top-0 z-40">
+    <div class="max-w-[1440px] mx-auto px-6 lg:px-10 h-16 flex items-center justify-between">
       
-      <!-- Brand & Theme Badge -->
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-500 p-0.5 shadow-lg shadow-emerald-500/20">
-          <img src="team-logo.jpg" alt="Logo" class="w-full h-full object-cover rounded-[10px]" onerror="this.src=''; this.className='hidden'">
-        </div>
-        <div>
-          <div class="flex items-center gap-2">
-            <h1 class="text-lg font-bold tracking-tight text-white">CyberTrust <span class="text-cyan-400">Nation</span></h1>
-            <span class="text-[11px] font-semibold uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded-full">
-              Theme: Digital Trust & Cyber-Secure Nation
-            </span>
+      <!-- Left: Identity & National Context -->
+      <div class="flex items-center gap-6">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded border border-white/10 bg-inset flex items-center justify-center overflow-hidden">
+            <img src="team-logo.jpg" alt="National Shield" class="w-full h-full object-cover grayscale opacity-90 hover:grayscale-0 transition" onerror="this.parentElement.innerHTML='<span class=\'font-mono text-xs font-bold text-brand\'>CT</span>'">
           </div>
-          <p class="text-xs text-slate-400">Public Cyber Awareness, Incident Resilience & Digital Service Continuity</p>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="font-display text-base font-bold tracking-tight text-white">CyberTrust <span class="text-brand">Nation</span></span>
+              <span class="text-[10px] font-mono uppercase tracking-widest text-slate-400 bg-white/[0.04] px-1.5 py-0.5 border border-white/[0.06] rounded">
+                FDN-2026
+              </span>
+            </div>
+            <p class="text-[11px] text-slate-400 font-mono">UAE Digital Trust & Cyber-Resilience Ecosystem</p>
+          </div>
+        </div>
+
+        <div class="hidden xl:block h-6 w-px bg-white/[0.08]"></div>
+
+        <div class="hidden xl:flex items-center gap-2 text-xs text-slate-400">
+          <span class="text-slate-500 font-mono">CHALLENGE:</span>
+          <span class="text-slate-300 font-medium">Digital Trust & Cyber-Secure Nation</span>
         </div>
       </div>
 
-      <!-- Quick Telemetry & Status -->
-      <div class="flex items-center gap-4">
-        <div class="hidden md:flex items-center gap-2 bg-slate-900/90 border border-slate-800 px-3 py-1.5 rounded-lg text-xs">
-          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 pulse-indicator"></span>
-          <span class="text-slate-400">Defense Sentinel:</span>
-          <span class="font-semibold text-emerald-400 font-mono">ACTIVE (ALPHA-SHIELD)</span>
+      <!-- Right: Operational Status & Executive Briefing -->
+      <div class="flex items-center gap-5">
+        <div class="hidden sm:flex items-center gap-2.5 px-3 py-1.5 rounded bg-inset border border-white/[0.06] text-xs">
+          <span class="status-pip"></span>
+          <span class="text-slate-400 font-mono">NATIONAL POSTURE:</span>
+          <span class="font-mono font-semibold text-brand">SECURE (ALPHA-1)</span>
         </div>
-        
-        <button id="btnOpenPitch" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-gradient-to-r from-emerald-500 to-cyan-500 text-slate-950 hover:opacity-90 transition shadow-md shadow-emerald-500/10 flex items-center gap-1.5">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-          Pitch & BMC Hub
+
+        <button id="btnOpenPitch" class="px-3.5 py-1.5 rounded text-xs font-semibold bg-white text-slate-950 hover:bg-slate-200 transition font-mono tracking-tight flex items-center gap-2">
+          <span>Briefing & BMC</span>
+          <span class="text-[10px] bg-slate-300 text-slate-900 px-1 py-0.2 rounded font-mono">5 SLIDES</span>
         </button>
       </div>
 
     </div>
 
-    <!-- Navigation Tabs -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex gap-1 border-t border-slate-800/60 overflow-x-auto text-sm">
-      <button class="nav-tab active px-4 py-2.5 border-b-2 font-medium flex items-center gap-2 transition" data-target="tab-scanner">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-        Citizen Cyber Safety Shield
+    <!-- Navigation Workbench Tabs -->
+    <div class="max-w-[1440px] mx-auto px-6 lg:px-10 flex gap-2 border-t border-white/[0.04] overflow-x-auto">
+      <button class="workbench-tab active" data-target="tab-scanner">
+        01. Trust & Scam Radar
       </button>
-
-      <button class="nav-tab px-4 py-2.5 border-b-2 border-transparent text-slate-400 hover:text-white font-medium flex items-center gap-2 transition" data-target="tab-resilience">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-        Infrastructure Incident Resilience
+      <button class="workbench-tab" data-target="tab-resilience">
+        02. Critical Infrastructure Resilience
       </button>
-
-      <button class="nav-tab px-4 py-2.5 border-b-2 border-transparent text-slate-400 hover:text-white font-medium flex items-center gap-2 transition" data-target="tab-opendata">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-        Open Data Threat Intelligence
+      <button class="workbench-tab" data-target="tab-opendata">
+        03. Bayanat Open Data Intelligence
       </button>
-
-      <button class="nav-tab px-4 py-2.5 border-b-2 border-transparent text-slate-400 hover:text-white font-medium flex items-center gap-2 transition" data-target="tab-agentguard">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-        Agentic AI Security & Trust
+      <button class="workbench-tab" data-target="tab-agentguard">
+        04. Securing Agentic AI
       </button>
-
-      <button class="nav-tab px-4 py-2.5 border-b-2 border-transparent text-slate-400 hover:text-white font-medium flex items-center gap-2 transition" data-target="tab-academy">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-        Public Cyber Safety Drills
+      <button class="workbench-tab" data-target="tab-academy">
+        05. Citizen Safety Drills
       </button>
     </div>
   </header>
 
-  <!-- Main Application Body -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-6">
+  <!-- ==================== MAIN CONTENT CONTAINER ==================== -->
+  <main class="max-w-[1440px] mx-auto px-6 lg:px-10 py-10 relative z-10">
 
-    <!-- ==================== TAB 1: CITIZEN CYBER SAFETY SHIELD ==================== -->
-    <section id="tab-scanner" class="tab-content space-y-6">
+    <!-- ==================== 01. TRUST & SCAM RADAR ==================== -->
+    <section id="tab-scanner" class="tab-content space-y-8">
       
-      <!-- Banner Overview -->
-      <div class="glass-panel p-6 relative overflow-hidden">
-        <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="max-w-3xl">
-          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 mb-3">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            Promoting Public Awareness & Trust in Digital Services
-          </span>
-          <h2 class="text-2xl font-bold text-white tracking-tight">AI Scam Radar & Digital Service Trust Verifier</h2>
-          <p class="text-slate-300 text-sm mt-1.5 leading-relaxed">
-            Protect citizens and residents against deceptive phishing, typosquatting domains, fake SMS notifications, and fraudulent payment portals impersonating government or postal services.
-          </p>
-        </div>
+      <!-- Editorial Section Header -->
+      <div class="max-w-3xl space-y-2">
+        <span class="font-mono text-xs uppercase tracking-widest text-brand">Public Awareness & Citizen Protection</span>
+        <h2 class="font-display text-3xl font-bold tracking-tight text-white">AI Scam Radar & Verified Domain Sentinel</h2>
+        <p class="text-slate-400 text-sm leading-relaxed">
+          Proactively protect citizens from deceptive smishing, spoofed traffic fines, and impersonation campaigns. Inspect suspicious links, SMS notifications, and emails against the official TDRA national whitelist registry.
+        </p>
       </div>
 
-      <!-- Live Inspection Console -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <!-- Asymmetrical Bento Workbench Grid -->
+      <div class="bento-grid">
         
-        <!-- Input & Test Presets (Left Col 7) -->
-        <div class="lg:col-span-7 space-y-4">
-          <div class="glass-panel p-5 space-y-4">
-            <div class="flex items-center justify-between">
-              <label for="scanInput" class="text-sm font-semibold text-slate-200 flex items-center gap-2">
-                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                Enter Suspicious Link, SMS Text, or Notification Message
+        <!-- Primary Area: Input Console & Threat Assessment -->
+        <div class="space-y-6">
+          
+          <div class="surface-panel p-6 space-y-5">
+            <div class="flex items-center justify-between border-b border-white/[0.06] pb-3">
+              <label for="scanInput" class="text-xs font-semibold uppercase tracking-wider text-slate-300 font-mono">
+                Input Payload Inspection Console
               </label>
-              <span class="text-xs text-slate-400 font-mono">NLP & Registry Analyzer</span>
+              <span class="text-[11px] font-mono text-slate-500">Heuristics v2.4 • Registry Sync</span>
             </div>
 
-            <textarea id="scanInput" rows="4" class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl p-3.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 font-mono transition" placeholder="e.g. Paste a message: 'Emirates Post: Your package has an unpaid fee of AED 12.50. Click epst-uae-track.biz/pay immediately to avoid penalty.'"></textarea>
+            <textarea id="scanInput" rows="4" class="w-full bg-inset border border-white/[0.08] rounded p-3.5 text-sm text-slate-100 placeholder-slate-600 focus:outline-none focus:border-brand font-mono leading-relaxed transition" placeholder="Paste link, SMS text, or notification body (e.g. 'Emirates Post: unpaid delivery fee AED 12.50 click epst-uae-track.biz/pay')"></textarea>
 
             <div class="flex items-center justify-between pt-1">
-              <button id="btnScan" class="px-5 py-2 rounded-xl text-sm font-semibold bg-emerald-500 hover:bg-emerald-400 text-slate-950 transition flex items-center gap-2 shadow-lg shadow-emerald-500/20">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                Analyze Trust & Threat Level
+              <button id="btnScan" class="px-4 py-2 rounded text-xs font-semibold bg-brand hover:bg-brandMuted text-slate-950 transition font-mono tracking-tight flex items-center gap-2">
+                <span>EXECUTE DEEP INSPECTION</span>
+                <span>→</span>
               </button>
-              <button id="btnClear" class="text-xs text-slate-400 hover:text-white transition">Clear Input</button>
+              <button id="btnClear" class="text-xs font-mono text-slate-500 hover:text-slate-300 transition">Clear Input</button>
             </div>
           </div>
 
-          <!-- Sample Real-World Attack Presets -->
-          <div class="glass-panel p-5 space-y-3">
-            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">Common UAE Cyber Threat Presets to Test:</h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-              <button class="preset-btn text-left p-3 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800 hover:border-slate-700 text-xs transition" data-preset="epost">
-                <span class="font-semibold text-amber-400 block mb-0.5">📦 Fake Parcel Delivery Smishing</span>
-                <span class="text-slate-400 line-clamp-1">"Emirates Post: Unpaid fee of AED 12.50. Click epst-uae-track.biz/pay..."</span>
+          <!-- Quick Scenario Presets -->
+          <div class="surface-panel p-6 space-y-3">
+            <span class="text-[11px] font-mono uppercase tracking-wider text-slate-400 block">
+              Common UAE Attack Vectors to Test:
+            </span>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <button class="preset-btn text-left p-3.5 rounded surface-inset hover:border-white/[0.15] border border-white/[0.05] transition group" data-preset="epost">
+                <span class="font-mono text-xs font-semibold text-slate-200 block group-hover:text-brand">01. Fake Parcel Delivery SMS</span>
+                <span class="text-[11px] text-slate-500 line-clamp-1 mt-0.5 font-mono">"Emirates Post: Unpaid fee AED 12.50 click epst-uae-track.biz..."</span>
               </button>
-              <button class="preset-btn text-left p-3 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800 hover:border-slate-700 text-xs transition" data-preset="police">
-                <span class="font-semibold text-rose-400 block mb-0.5">🚨 Spoofed Police Fine Alert</span>
-                <span class="text-slate-400 line-clamp-1">"Dubai Police: Traffic fine overdue notice. Pay at dubaipolice-portal.net..."</span>
+              <button class="preset-btn text-left p-3.5 rounded surface-inset hover:border-white/[0.15] border border-white/[0.05] transition group" data-preset="police">
+                <span class="font-mono text-xs font-semibold text-slate-200 block group-hover:text-brand">02. Spoofed Police Fine Alert</span>
+                <span class="text-[11px] text-slate-500 line-clamp-1 mt-0.5 font-mono">"Dubai Police: Overdue speeding fine pay at dubaipolice-portal.net..."</span>
               </button>
-              <button class="preset-btn text-left p-3 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800 hover:border-slate-700 text-xs transition" data-preset="bank">
-                <span class="font-semibold text-red-400 block mb-0.5">🏦 Bank Impersonation / OTP Theft</span>
-                <span class="text-slate-400 line-clamp-1">"Central Bank UAE: Account freeze warning, update your Emirates ID at..."</span>
+              <button class="preset-btn text-left p-3.5 rounded surface-inset hover:border-white/[0.15] border border-white/[0.05] transition group" data-preset="bank">
+                <span class="font-mono text-xs font-semibold text-slate-200 block group-hover:text-brand">03. Central Bank Card Freeze</span>
+                <span class="text-[11px] text-slate-500 line-clamp-1 mt-0.5 font-mono">"CBUAE: Account freeze warning, update Emirates ID at cbu-security..."</span>
               </button>
-              <button class="preset-btn text-left p-3 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800 hover:border-slate-700 text-xs transition" data-preset="official">
-                <span class="font-semibold text-emerald-400 block mb-0.5">✅ Authentic TAMM Gov Portal</span>
-                <span class="text-slate-400 line-clamp-1">"https://www.tamm.abudhabi/en/services/housing (Official Portal)"</span>
+              <button class="preset-btn text-left p-3.5 rounded surface-inset hover:border-white/[0.15] border border-white/[0.05] transition group" data-preset="official">
+                <span class="font-mono text-xs font-semibold text-slate-200 block group-hover:text-brand">04. Authentic TAMM Government Portal</span>
+                <span class="text-[11px] text-slate-500 line-clamp-1 mt-0.5 font-mono">"https://www.tamm.abudhabi/en/services/housing"</span>
               </button>
             </div>
           </div>
-        </div>
 
-        <!-- Result Display Card (Right Col 5) -->
-        <div class="lg:col-span-5">
-          <div id="scanResultPlaceholder" class="glass-panel p-8 text-center flex flex-col items-center justify-center min-h-[380px] space-y-3">
-            <div class="w-16 h-16 rounded-full bg-slate-800/80 flex items-center justify-center text-slate-400">
-              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-            </div>
-            <h4 class="text-base font-semibold text-slate-200">Awaiting Input to Analyze</h4>
-            <p class="text-xs text-slate-400 max-w-xs">
-              Type or select a message preset on the left and click "Analyze" to inspect lexical anomalies, brand spoofing, and registry validity.
-            </p>
-          </div>
-
-          <!-- Dynamic Result Box -->
-          <div id="scanResultContainer" class="hidden glass-panel p-5 space-y-4">
+          <!-- Dynamic Inspection Output Arena -->
+          <div id="scanResultContainer" class="hidden surface-panel p-6 space-y-5 border-l-4 border-l-brand">
             
-            <!-- Verdict Badge & Score Meter -->
-            <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+            <div class="flex items-center justify-between border-b border-white/[0.06] pb-4">
               <div>
-                <span class="text-[11px] uppercase font-bold text-slate-400 block mb-1">Threat Assessment Verdict</span>
-                <span id="resVerdictBadge" class="px-3 py-1 rounded-lg text-xs font-bold tracking-wide uppercase">
+                <span class="text-[10px] font-mono uppercase tracking-widest text-slate-500 block mb-1">Assessment Verdict</span>
+                <span id="resVerdictBadge" class="px-2.5 py-1 rounded text-xs font-mono font-bold tracking-wider uppercase">
                   CRITICAL_THREAT
                 </span>
               </div>
               <div class="text-right">
-                <span class="text-[11px] uppercase font-bold text-slate-400 block mb-0.5">Risk Score</span>
-                <span id="resRiskScore" class="text-2xl font-extrabold font-mono text-rose-400">85/100</span>
+                <span class="text-[10px] font-mono uppercase tracking-widest text-slate-500 block mb-0.5">Calculated Risk Index</span>
+                <span id="resRiskScore" class="font-display text-2xl font-bold font-mono text-signalCrit">85 / 100</span>
               </div>
             </div>
 
-            <!-- Risk Flags Breakdown -->
+            <!-- Red Flags List -->
             <div class="space-y-2">
-              <h5 class="text-xs font-bold uppercase tracking-wider text-slate-400">AI Threat Indicators Detected:</h5>
-              <div id="resFlagsList" class="space-y-1.5 text-xs max-h-48 overflow-y-auto pr-1">
-                <!-- dynamic items -->
-              </div>
+              <span class="text-[11px] font-mono uppercase tracking-wider text-slate-400 block">Identified Indicators:</span>
+              <div id="resFlagsList" class="space-y-1.5 text-xs font-mono"></div>
             </div>
 
-            <!-- Official Entity Redirection -->
-            <div id="resOfficialBox" class="p-3.5 rounded-xl bg-slate-900/90 border border-emerald-500/30 space-y-1.5">
-              <div class="flex items-center gap-1.5 text-xs font-semibold text-emerald-400">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                Verified Official Government Gateway:
+            <!-- Official Gateway Alternative -->
+            <div id="resOfficialBox" class="p-4 rounded surface-inset border border-white/[0.08] space-y-1.5">
+              <div class="flex items-center gap-2 text-xs font-mono font-semibold text-brand">
+                <span class="status-pip"></span>
+                <span>Verified Official Government Gateway:</span>
               </div>
               <p id="resOfficialName" class="text-xs text-slate-200 font-medium">Emirates Post Official</p>
-              <a id="resOfficialUrl" href="#" target="_blank" class="text-xs text-cyan-400 hover:underline font-mono break-all block">https://www.emiratespost.ae</a>
+              <a id="resOfficialUrl" href="#" target="_blank" class="text-xs text-brand hover:underline font-mono break-all block">https://www.emiratespost.ae</a>
             </div>
 
-            <!-- Action Advisory & Report Button -->
-            <div class="pt-2 flex items-center justify-between gap-3">
-              <button id="btnReportIncident" class="w-full py-2 px-3 rounded-lg text-xs font-semibold bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 transition flex items-center justify-center gap-1.5">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                Dispatch Report to National eCrime / CSC
+            <div class="pt-2">
+              <button id="btnReportIncident" class="w-full py-2.5 px-4 rounded text-xs font-mono font-semibold surface-inset hover:bg-white/[0.04] text-slate-300 border border-white/[0.1] transition flex items-center justify-center gap-2">
+                <span>Dispatch Threat Telemetry to National eCrime / CSC</span>
+                <span>↗</span>
               </button>
             </div>
 
           </div>
+
+          <div id="scanResultPlaceholder" class="surface-panel p-10 text-center space-y-2">
+            <span class="font-mono text-xs uppercase tracking-widest text-slate-600 block">Inspection Engine Idle</span>
+            <p class="text-xs text-slate-500 max-w-sm mx-auto">
+              Select a threat scenario or paste custom content above to execute forensic analysis.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Secondary Panel: Sticky Live Cyber Posture & Directory -->
+        <div class="space-y-6">
+          
+          <div class="surface-panel p-5 space-y-4">
+            <div class="flex items-center justify-between border-b border-white/[0.06] pb-3">
+              <span class="text-xs font-mono uppercase tracking-wider text-slate-300 font-semibold">National Threat Radar</span>
+              <span class="status-pip"></span>
+            </div>
+
+            <div class="space-y-3 font-mono text-xs">
+              <div class="flex justify-between items-center py-1 border-b border-white/[0.04]">
+                <span class="text-slate-400">Total Deflected (2026):</span>
+                <span class="text-white font-bold">1,425,890</span>
+              </div>
+              <div class="flex justify-between items-center py-1 border-b border-white/[0.04]">
+                <span class="text-slate-400">Smishing Share:</span>
+                <span class="text-signalWarn font-bold">38.5%</span>
+              </div>
+              <div class="flex justify-between items-center py-1 border-b border-white/[0.04]">
+                <span class="text-slate-400">Gov Clones Thwarted:</span>
+                <span class="text-slate-200 font-bold">24.2%</span>
+              </div>
+              <div class="flex justify-between items-center py-1">
+                <span class="text-slate-400">Mitigation Latency:</span>
+                <span class="text-brand font-bold">1.42s</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Official Registry Whitelist Snippet -->
+          <div class="surface-panel p-5 space-y-3">
+            <span class="text-xs font-mono uppercase tracking-wider text-slate-300 font-semibold block border-b border-white/[0.06] pb-3">
+              Verified Federal Whitelist Index
+            </span>
+            <p class="text-[11px] text-slate-500">
+              Domains cryptographically validated against the TDRA Accredited Registry:
+            </p>
+            <ul class="space-y-1.5 font-mono text-xs text-slate-400">
+              <li class="flex items-center justify-between py-1 border-b border-white/[0.03]">
+                <span class="text-slate-200">TAMM Abu Dhabi</span>
+                <span class="text-brand">*.tamm.abudhabi</span>
+              </li>
+              <li class="flex items-center justify-between py-1 border-b border-white/[0.03]">
+                <span class="text-slate-200">Dubai Government</span>
+                <span class="text-brand">*.dubai.ae</span>
+              </li>
+              <li class="flex items-center justify-between py-1 border-b border-white/[0.03]">
+                <span class="text-slate-200">UAE Official Portal</span>
+                <span class="text-brand">u.ae</span>
+              </li>
+              <li class="flex items-center justify-between py-1 border-b border-white/[0.03]">
+                <span class="text-slate-200">Central Bank UAE</span>
+                <span class="text-brand">*.cbuae.gov.ae</span>
+              </li>
+              <li class="flex items-center justify-between py-1">
+                <span class="text-slate-200">Emirates Post</span>
+                <span class="text-brand">emiratespost.ae</span>
+              </li>
+            </ul>
+          </div>
+
         </div>
 
       </div>
 
     </section>
 
-    <!-- ==================== TAB 2: CRITICAL INFRASTRUCTURE RESILIENCE ==================== -->
-    <section id="tab-resilience" class="tab-content hidden space-y-6">
+    <!-- ==================== 02. CRITICAL INFRASTRUCTURE RESILIENCE ==================== -->
+    <section id="tab-resilience" class="tab-content hidden space-y-8">
       
-      <!-- Resilience Header -->
-      <div class="glass-panel p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-        <div>
-          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 mb-2">
-            Ensuring Continuity, Reliability & Confidence in Digital Services
-          </span>
-          <h2 class="text-2xl font-bold text-white tracking-tight">Autonomous Critical Infrastructure Resilience Engine</h2>
-          <p class="text-slate-300 text-sm mt-1">
-            Simulate large-scale cyber incidents and observe how autonomous AI agents isolate threats and guarantee zero downtime.
-          </p>
-        </div>
+      <div class="max-w-3xl space-y-2">
+        <span class="font-mono text-xs uppercase tracking-widest text-brand">Service Continuity & Incident Mitigation</span>
+        <h2 class="font-display text-3xl font-bold tracking-tight text-white">Autonomous Incident Resilience Engine</h2>
+        <p class="text-slate-400 text-sm leading-relaxed">
+          Testing national digital resilience against catastrophic threats. Simulate large-scale ransomware and volumetric DDoS attacks to observe autonomous multi-agent failovers preserving 100% service uptime.
+        </p>
+      </div>
 
-        <!-- Trigger Drill CTA -->
-        <div class="flex items-center gap-2">
-          <select id="drillPresetSelect" class="bg-slate-900 border border-slate-700 text-xs rounded-lg px-3 py-2 text-slate-200 focus:outline-none focus:border-cyan-500">
-            <option value="gov_ransomware">Simulate: Large-Scale Ransomware Attack on Gov Gateway</option>
-            <option value="finance_ddos">Simulate: 4.2 Tbps DDoS on Financial Clearing</option>
-            <option value="mass_smishing">Simulate: Nationwide Smishing Campaign Against Residents</option>
+      <!-- Execution Bar -->
+      <div class="surface-panel p-5 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <span class="text-xs font-mono uppercase tracking-wider text-slate-400">SELECT DRILL:</span>
+          <select id="drillPresetSelect" class="bg-inset border border-white/[0.08] text-xs font-mono rounded px-3 py-2 text-slate-200 focus:outline-none focus:border-brand">
+            <option value="gov_ransomware">Incident 01: Critical Gov Gateway Ransomware & Supply Chain Attack</option>
+            <option value="finance_ddos">Incident 02: 4.2 Tbps DDoS Surge on Financial Clearing</option>
+            <option value="mass_smishing">Incident 03: Nationwide Smishing Campaign Against Residents</option>
           </select>
-          <button id="btnRunDrill" class="px-4 py-2 rounded-lg text-xs font-bold bg-rose-500 hover:bg-rose-400 text-white transition flex items-center gap-1.5 shadow-lg shadow-rose-500/20 whitespace-nowrap">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>
-            Execute Drill
-          </button>
         </div>
+
+        <button id="btnRunDrill" class="px-5 py-2 rounded text-xs font-mono font-semibold bg-signalCrit hover:bg-rose-700 text-white transition flex items-center justify-center gap-2">
+          <span>TRIGGER AUTONOMOUS DRILL</span>
+          <span>⚡</span>
+        </button>
       </div>
 
-      <!-- Infrastructure Sector Status Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4" id="sectorGrid">
-        <!-- dynamic sectors -->
-      </div>
+      <!-- 5-Sector Telemetry Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3" id="sectorGrid"></div>
 
-      <!-- Live Incident Timeline & Swarm Response -->
-      <div class="glass-panel p-6 space-y-4">
-        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+      <!-- Multi-Agent Timeline -->
+      <div class="surface-panel p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-white/[0.06] pb-3">
           <div>
-            <h3 class="text-base font-bold text-white flex items-center gap-2">
-              <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 pulse-indicator"></span>
-              Autonomous Multi-Agent AI Incident Timeline
-            </h3>
-            <p class="text-xs text-slate-400" id="drillSubtitle">Select and run an incident drill above to see the autonomous AI playbook response.</p>
+            <h3 class="font-display text-base font-bold text-white">Autonomous Multi-Agent Mitigation Sequence</h3>
+            <p class="text-xs text-slate-500 font-mono" id="drillSubtitle">Awaiting drill initiation.</p>
           </div>
           <div class="text-right">
-            <span class="text-xs text-slate-400 block">Continuity Assurance:</span>
-            <span class="text-sm font-bold text-emerald-400 font-mono" id="drillUptimeMetric">100.0% Service Uptime</span>
+            <span class="text-[10px] font-mono uppercase text-slate-500 block">Service Continuity</span>
+            <span class="text-xs font-mono font-bold text-brand" id="drillUptimeMetric">100.0% UPTIME PRESERVED</span>
           </div>
         </div>
 
-        <div id="drillTimelineContainer" class="space-y-3 pt-2">
-          <!-- Timeline steps populate here -->
-          <div class="text-center py-8 text-slate-500 text-xs">
-            No active drill executing. Click "Execute Drill" to launch a live simulation.
+        <div id="drillTimelineContainer" class="surface-inset rounded min-h-[160px] divide-y divide-white/[0.04]">
+          <div class="p-8 text-center text-xs font-mono text-slate-600">
+            Engine ready. Click "TRIGGER AUTONOMOUS DRILL" to observe real-time mitigation playbooks.
           </div>
         </div>
       </div>
 
     </section>
 
-    <!-- ==================== TAB 3: OPEN DATA THREAT INTELLIGENCE ==================== -->
-    <section id="tab-opendata" class="tab-content hidden space-y-6">
+    <!-- ==================== 03. OPEN DATA INTELLIGENCE ==================== -->
+    <section id="tab-opendata" class="tab-content hidden space-y-8">
       
-      <div class="glass-panel p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-        <div>
-          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 mb-2">
-            Powered by UAE Open Data (Bayanat.ae / TDRA)
-          </span>
-          <h2 class="text-2xl font-bold text-white tracking-tight">National Cyber Telemetry & Public Trust Dashboard</h2>
-          <p class="text-slate-300 text-sm mt-1">
-            Real data telemetry demonstrating threats mitigated across all 7 Emirates, vector distributions, and the digital trust progression.
+      <div class="flex flex-col md:flex-row items-start md:items-end justify-between gap-4">
+        <div class="max-w-3xl space-y-2">
+          <span class="font-mono text-xs uppercase tracking-widest text-brand">Bayanat.ae & TDRA Telemetry</span>
+          <h2 class="font-display text-3xl font-bold tracking-tight text-white">National Cyber Open Data Observatory</h2>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Authentic UAE Open Data telemetry reflecting incidents deflected across all 7 Emirates, primary attack vectors, and multi-year public trust progression.
           </p>
         </div>
 
-        <a href="/api/opendata/csv" download class="px-3.5 py-2 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition flex items-center gap-1.5">
-          <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-          Export Open Data (CSV)
+        <a href="/api/opendata/csv" download class="px-3.5 py-2 rounded surface-inset hover:bg-white/[0.04] text-slate-300 border border-white/[0.1] text-xs font-mono transition flex items-center gap-2">
+          <span>Export Dataset (CSV)</span>
+          <span>↓</span>
         </a>
       </div>
 
-      <!-- National Metrics Row -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="glass-panel p-4">
-          <span class="text-xs text-slate-400 block">Total Threats Deflected</span>
-          <span class="text-2xl font-extrabold text-emerald-400 font-mono mt-1 block">1,425,890</span>
-          <span class="text-[11px] text-emerald-500/80">Across UAE Digital Gateways</span>
-        </div>
-        <div class="glass-panel p-4">
-          <span class="text-xs text-slate-400 block">Public Trust Index</span>
-          <span class="text-2xl font-extrabold text-cyan-400 font-mono mt-1 block">96.8%</span>
-          <span class="text-[11px] text-cyan-500/80">Highest Regional Confidence</span>
-        </div>
-        <div class="glass-panel p-4">
-          <span class="text-xs text-slate-400 block">Critical Service Uptime</span>
-          <span class="text-2xl font-extrabold text-slate-100 font-mono mt-1 block">99.994%</span>
-          <span class="text-[11px] text-slate-400">Zero Large-Scale Outages</span>
-        </div>
-        <div class="glass-panel p-4">
-          <span class="text-xs text-slate-400 block">Autonomous Mitigation Speed</span>
-          <span class="text-2xl font-extrabold text-amber-400 font-mono mt-1 block">1.42s</span>
-          <span class="text-[11px] text-amber-500/80">From Detection to Remediation</span>
-        </div>
-      </div>
-
-      <!-- Charts Section -->
+      <!-- Asymmetrical Chart Grid -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
-        <!-- Bar Chart: Emirates Breakdown (Col 7) -->
-        <div class="lg:col-span-7 glass-panel p-5 space-y-3">
-          <div class="flex items-center justify-between">
-            <h4 class="text-sm font-bold text-white">Threats Mitigated by Emirate (2026)</h4>
-            <span class="text-xs text-slate-400 font-mono">Bayanat.ae Dataset</span>
+        <div class="lg:col-span-7 surface-panel p-6 space-y-4">
+          <div class="flex items-center justify-between border-b border-white/[0.06] pb-3">
+            <h4 class="font-display text-sm font-bold text-white">Threats Mitigated by Emirate (2026)</h4>
+            <span class="text-[11px] font-mono text-slate-500">Bayanat.ae Open Data</span>
           </div>
           <div class="h-64 relative">
             <canvas id="chartEmirates"></canvas>
           </div>
         </div>
 
-        <!-- Doughnut Chart: Threat Vectors (Col 5) -->
-        <div class="lg:col-span-5 glass-panel p-5 space-y-3">
-          <div class="flex items-center justify-between">
-            <h4 class="text-sm font-bold text-white">Attack Vectors Distribution</h4>
-            <span class="text-xs text-slate-400 font-mono">Telemetry Share</span>
+        <div class="lg:col-span-5 surface-panel p-6 space-y-4">
+          <div class="flex items-center justify-between border-b border-white/[0.06] pb-3">
+            <h4 class="font-display text-sm font-bold text-white">Attack Vector Distribution</h4>
+            <span class="text-[11px] font-mono text-slate-500">National Share</span>
           </div>
           <div class="h-64 relative">
             <canvas id="chartVectors"></canvas>
@@ -356,9 +376,12 @@
 
       </div>
 
-      <!-- Trust Progression History -->
-      <div class="glass-panel p-5 space-y-3">
-        <h4 class="text-sm font-bold text-white">Five-Year Digital Trust Progression (2022 - 2026)</h4>
+      <!-- 5-Year Trust Progression -->
+      <div class="surface-panel p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-white/[0.06] pb-3">
+          <h4 class="font-display text-sm font-bold text-white">National Digital Trust Progression (2022–2026)</h4>
+          <span class="text-[11px] font-mono text-brand">Current Index: 96.8%</span>
+        </div>
         <div class="h-56 relative">
           <canvas id="chartProgression"></canvas>
         </div>
@@ -366,129 +389,124 @@
 
     </section>
 
-    <!-- ==================== TAB 4: AGENTIC AI SECURITY & TRUST ==================== -->
-    <section id="tab-agentguard" class="tab-content hidden space-y-6">
+    <!-- ==================== 04. SECURING AGENTIC AI ==================== -->
+    <section id="tab-agentguard" class="tab-content hidden space-y-8">
       
-      <div class="glass-panel p-6 space-y-2">
-        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
-          Addressing the Hackathon Challenge: Securing Agentic AI
-        </span>
-        <h2 class="text-2xl font-bold text-white tracking-tight">Agentic AI Governance & Identity Attestation Engine</h2>
-        <p class="text-slate-300 text-sm max-w-3xl">
-          As government agencies deploy autonomous AI agents to automate citizen services, our framework verifies agent identities, manages blast-radius permissions, monitors for prompt injection or unauthorized behaviors, and enforces cryptographic accountability.
+      <div class="max-w-3xl space-y-2">
+        <span class="font-mono text-xs uppercase tracking-widest text-brand">Hackathon Challenge Focus</span>
+        <h2 class="font-display text-3xl font-bold tracking-tight text-white">Agentic AI Governance & Identity Enclave</h2>
+        <p class="text-slate-400 text-sm leading-relaxed">
+          Verifying identities, bounding permissions, and enforcing cryptographic accountability for autonomous AI agents deployed in public sector workflows.
         </p>
       </div>
 
-      <!-- Agent Registry Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-5" id="agentRegistryGrid">
-        <!-- dynamic agents -->
-      </div>
+      <!-- Agent Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="agentRegistryGrid"></div>
 
-      <!-- Guardrail Policies -->
-      <div class="glass-panel p-6 space-y-4">
-        <h3 class="text-base font-bold text-white">Core Agentic Guardrail Standards (UAE 2025-2031 Alignment)</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-          <div class="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1">
-            <span class="font-bold text-emerald-400 block">1. Cryptographic Agent Identity Attestation</span>
-            <p class="text-slate-400">Autonomous agents must present verifiable hardware-rooted credentials and mTLS certificates before executing any public API actions.</p>
+      <!-- Governance Framework Standard -->
+      <div class="surface-panel p-6 space-y-4">
+        <h3 class="font-display text-sm font-bold text-white border-b border-white/[0.06] pb-3">
+          Agentic Governance Guardrails (UAE 2025–2031 Framework)
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono">
+          <div class="p-4 rounded surface-inset border border-white/[0.04] space-y-1">
+            <span class="text-brand font-bold block">01. Cryptographic DID Attestation</span>
+            <p class="text-slate-400 font-body">Every autonomous agent presents verifiable hardware-rooted credentials and mTLS certificates before executing any federal API action.</p>
           </div>
-          <div class="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1">
-            <span class="font-bold text-cyan-400 block">2. Blast-Radius Sandboxing & Immutability</span>
-            <p class="text-slate-400">MicroVM isolation guarantees that an agent cannot exceed memory boundaries, access lateral databases, or alter sovereign logs.</p>
+          <div class="p-4 rounded surface-inset border border-white/[0.04] space-y-1">
+            <span class="text-brand font-bold block">02. MicroVM Blast-Radius Containment</span>
+            <p class="text-slate-400 font-body">Ephemerality prevents memory leakage, prevents lateral movements across clusters, and enforces immutable audit logs.</p>
           </div>
-          <div class="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1">
-            <span class="font-bold text-amber-400 block">3. Biometric Human-in-the-Loop Override</span>
-            <p class="text-slate-400">High-consequence financial settlements or property deed changes require explicit UAE PASS biometric sign-off from human authorities.</p>
+          <div class="p-4 rounded surface-inset border border-white/[0.04] space-y-1">
+            <span class="text-brand font-bold block">03. Biometric Human-in-the-Loop Override</span>
+            <p class="text-slate-400 font-body">Sensitive financial movements or land deed mutations mandate explicit UAE PASS biometric validation from human supervisors.</p>
           </div>
-          <div class="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1">
-            <span class="font-bold text-purple-400 block">4. Semantic Adversarial Shield</span>
-            <p class="text-slate-400">Real-time vector embeddings actively detect prompt injections, jailbreak attempts, and indirect extraction attacks before execution.</p>
+          <div class="p-4 rounded surface-inset border border-white/[0.04] space-y-1">
+            <span class="text-brand font-bold block">04. Adversarial Prompt Injection Defense</span>
+            <p class="text-slate-400 font-body">Vector classifiers continuously filter and intercept prompt-injection attempts, jailbreaks, and indirect exfiltration vectors.</p>
           </div>
         </div>
       </div>
 
     </section>
 
-    <!-- ==================== TAB 5: PUBLIC CYBER SAFETY DRILLS ==================== -->
-    <section id="tab-academy" class="tab-content hidden space-y-6">
+    <!-- ==================== 05. CITIZEN SAFETY DRILLS ==================== -->
+    <section id="tab-academy" class="tab-content hidden space-y-8">
       
-      <div class="glass-panel p-6 space-y-2">
-        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
-          Interactive Public Awareness & Cyber Hygiene
-        </span>
-        <h2 class="text-2xl font-bold text-white tracking-tight">Gamified Citizen Cyber Safety Drills</h2>
-        <p class="text-slate-300 text-sm max-w-3xl">
-          Empowering UAE residents to identify emerging cyber threats, from AI voice clones to parking meter QR code quishing. Complete drills to earn your National Cyber Guardian badge.
+      <div class="max-w-3xl space-y-2">
+        <span class="font-mono text-xs uppercase tracking-widest text-brand">Public Awareness & Cyber Hygiene</span>
+        <h2 class="font-display text-3xl font-bold tracking-tight text-white">Gamified Resident Cyber Drills</h2>
+        <p class="text-slate-400 text-sm leading-relaxed">
+          Interactive scenarios to empower UAE residents against deepfakes, parking meter QR scams, and deceptive delivery fees.
         </p>
       </div>
 
-      <!-- Drill Cards -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         
-        <div class="glass-panel p-5 space-y-4 flex flex-col justify-between">
+        <div class="surface-panel p-6 space-y-4 flex flex-col justify-between">
           <div class="space-y-2">
-            <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30">Drill 01</span>
-            <h4 class="text-base font-bold text-white">AI Voice Cloning Phone Call</h4>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              You receive a call from an AI clone of your bank manager claiming your account is locked due to unusual activity and requesting your UAE PASS OTP to verify.
+            <span class="text-[10px] font-mono uppercase tracking-widest text-slate-500">Drill 01</span>
+            <h4 class="font-display text-base font-bold text-white">AI Voice Cloning Phone Scam</h4>
+            <p class="text-xs text-slate-400 leading-relaxed font-body">
+              An incoming caller sounds identical to your bank manager, claiming your account is locked and asking for your UAE PASS OTP immediately.
             </p>
           </div>
           <div class="space-y-2 pt-2">
-            <button class="quiz-choice-btn w-full p-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-left text-xs transition" data-correct="false">
-              A) Share the OTP quickly before the account freezes
+            <button class="quiz-choice-btn w-full p-2.5 rounded surface-inset hover:bg-white/[0.04] border border-white/[0.06] text-left text-xs font-mono transition" data-correct="false">
+              A) Provide the OTP to avoid bank card suspension
             </button>
-            <button class="quiz-choice-btn w-full p-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-left text-xs transition" data-correct="true">
-              B) Hang up immediately; banks never ask for OTPs over calls
+            <button class="quiz-choice-btn w-full p-2.5 rounded surface-inset hover:bg-white/[0.04] border border-white/[0.06] text-left text-xs font-mono transition" data-correct="true">
+              B) Disconnect immediately; banks never ask for OTPs
             </button>
-            <button class="quiz-choice-btn w-full p-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-left text-xs transition" data-correct="false">
-              C) Send a photo of your Emirates ID via WhatsApp
+            <button class="quiz-choice-btn w-full p-2.5 rounded surface-inset hover:bg-white/[0.04] border border-white/[0.06] text-left text-xs font-mono transition" data-correct="false">
+              C) Send a photo of your Emirates ID on WhatsApp
             </button>
           </div>
-          <div class="quiz-feedback hidden text-xs font-semibold p-2.5 rounded-lg"></div>
+          <div class="quiz-feedback hidden text-xs font-mono p-3 rounded surface-inset"></div>
         </div>
 
-        <div class="glass-panel p-5 space-y-4 flex flex-col justify-between">
+        <div class="surface-panel p-6 space-y-4 flex flex-col justify-between">
           <div class="space-y-2">
-            <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">Drill 02</span>
-            <h4 class="text-base font-bold text-white">Parking Meter QR Code ("Quishing")</h4>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              You spot a physical sticker QR code pasted on a parking meter directing you to a payment site with domain `pay-rta-parking-ae.top`.
+            <span class="text-[10px] font-mono uppercase tracking-widest text-slate-500">Drill 02</span>
+            <h4 class="font-display text-base font-bold text-white">Parking Meter QR Code ("Quishing")</h4>
+            <p class="text-xs text-slate-400 leading-relaxed font-body">
+              A physical sticker QR code is pasted on an outdoor parking meter pointing to domain `pay-rta-parking-ae.top`.
             </p>
           </div>
           <div class="space-y-2 pt-2">
-            <button class="quiz-choice-btn w-full p-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-left text-xs transition" data-correct="false">
-              A) Scan and pay since it has the RTA logo on the webpage
+            <button class="quiz-choice-btn w-full p-2.5 rounded surface-inset hover:bg-white/[0.04] border border-white/[0.06] text-left text-xs font-mono transition" data-correct="false">
+              A) Scan and pay since it shows an official municipal logo
             </button>
-            <button class="quiz-choice-btn w-full p-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-left text-xs transition" data-correct="true">
-              B) Avoid scanning unknown sticker QR codes; use the official RTA app
+            <button class="quiz-choice-btn w-full p-2.5 rounded surface-inset hover:bg-white/[0.04] border border-white/[0.06] text-left text-xs font-mono transition" data-correct="true">
+              B) Avoid unknown sticker QR codes; pay via the official RTA app
             </button>
-            <button class="quiz-choice-btn w-full p-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-left text-xs transition" data-correct="false">
-              C) Forward the QR code link to family members
+            <button class="quiz-choice-btn w-full p-2.5 rounded surface-inset hover:bg-white/[0.04] border border-white/[0.06] text-left text-xs font-mono transition" data-correct="false">
+              C) Enter your credit card to test if it's legit
             </button>
           </div>
-          <div class="quiz-feedback hidden text-xs font-semibold p-2.5 rounded-lg"></div>
+          <div class="quiz-feedback hidden text-xs font-mono p-3 rounded surface-inset"></div>
         </div>
 
-        <div class="glass-panel p-5 space-y-4 flex flex-col justify-between">
+        <div class="surface-panel p-6 space-y-4 flex flex-col justify-between">
           <div class="space-y-2">
-            <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">Drill 03</span>
-            <h4 class="text-base font-bold text-white">Urgent Traffic Fine Discount SMS</h4>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              An SMS claims: "50% discount on all traffic fines if paid within 2 hours. Pay now at dubaipolice-discounts.cc".
+            <span class="text-[10px] font-mono uppercase tracking-widest text-slate-500">Drill 03</span>
+            <h4 class="font-display text-base font-bold text-white">Urgent Traffic Fine Discount SMS</h4>
+            <p class="text-xs text-slate-400 leading-relaxed font-body">
+              An SMS claims 50% discount on traffic fines if settled within 2 hours at `dubaipolice-discounts.cc`.
             </p>
           </div>
           <div class="space-y-2 pt-2">
-            <button class="quiz-choice-btn w-full p-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-left text-xs transition" data-correct="false">
-              A) Pay fast to take advantage of the discount
+            <button class="quiz-choice-btn w-full p-2.5 rounded surface-inset hover:bg-white/[0.04] border border-white/[0.06] text-left text-xs font-mono transition" data-correct="false">
+              A) Settle quickly to claim the 50% discount
             </button>
-            <button class="quiz-choice-btn w-full p-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-left text-xs transition" data-correct="true">
-              B) Fake link on .cc domain; verify fines only on official police app or TAMM
+            <button class="quiz-choice-btn w-full p-2.5 rounded surface-inset hover:bg-white/[0.04] border border-white/[0.06] text-left text-xs font-mono transition" data-correct="true">
+              B) Untrusted .cc domain; inspect fines only via official police app or TAMM
             </button>
-            <button class="quiz-choice-btn w-full p-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-left text-xs transition" data-correct="false">
-              C) Call the phone number inside the SMS
+            <button class="quiz-choice-btn w-full p-2.5 rounded surface-inset hover:bg-white/[0.04] border border-white/[0.06] text-left text-xs font-mono transition" data-correct="false">
+              C) Forward to contacts to notify them
             </button>
           </div>
-          <div class="quiz-feedback hidden text-xs font-semibold p-2.5 rounded-lg"></div>
+          <div class="quiz-feedback hidden text-xs font-mono p-3 rounded surface-inset"></div>
         </div>
 
       </div>
@@ -497,83 +515,78 @@
 
   </main>
 
-  <!-- ==================== PITCH DECK & BMC MODAL ==================== -->
-  <div id="pitchModal" class="fixed inset-0 modal-backdrop z-50 flex items-center justify-center p-4 hidden">
-    <div class="glass-panel-glow max-w-5xl w-full max-h-[90vh] overflow-y-auto p-6 md:p-8 space-y-6 relative bg-slate-950/95 border border-slate-700">
+  <!-- ==================== EXECUTIVE BRIEFING & BMC SLIDE-OVER ==================== -->
+  <div id="pitchModal" class="fixed inset-0 executive-modal-backdrop z-50 flex items-center justify-center p-4 lg:p-8 hidden">
+    <div class="surface-panel max-w-5xl w-full max-h-[92vh] overflow-y-auto p-8 space-y-8 bg-surface border border-white/[0.12]">
       
-      <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+      <div class="flex items-center justify-between border-b border-white/[0.08] pb-4">
         <div>
-          <span class="text-xs font-bold uppercase tracking-wider text-emerald-400">Hackathon Pitch & Evaluation Deliverables</span>
-          <h3 class="text-xl font-bold text-white">5-Slide Presentation Deck & Business Model Canvas (BMC)</h3>
+          <span class="font-mono text-xs uppercase tracking-widest text-brand">Hackathon Deliverables Dossier</span>
+          <h3 class="font-display text-xl font-bold text-white">5-Slide Pitch Briefing & Business Model Canvas (BMC)</h3>
         </div>
-        <button id="btnClosePitch" class="text-slate-400 hover:text-white p-2 rounded-lg bg-slate-900 hover:bg-slate-800">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        <button id="btnClosePitch" class="px-2.5 py-1 rounded text-xs font-mono surface-inset hover:text-white text-slate-400 border border-white/[0.08]">
+          ✕ CLOSE [ESC]
         </button>
       </div>
 
-      <!-- Slide Presenter Engine -->
+      <!-- Presenter Engine -->
       <div class="space-y-4">
-        
-        <!-- Slide Controls & Timer -->
-        <div class="flex flex-wrap items-center justify-between gap-3 bg-slate-900/90 p-3.5 rounded-xl border border-slate-800">
+        <div class="flex flex-wrap items-center justify-between gap-3 p-3 rounded surface-inset border border-white/[0.06]">
           <div class="flex items-center gap-2">
-            <button id="btnPrevSlide" class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200">← Prev</button>
-            <span id="slideIndicator" class="text-xs font-mono font-bold text-cyan-400">Slide 1 of 5</span>
-            <button id="btnNextSlide" class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200">Next →</button>
+            <button id="btnPrevSlide" class="px-3 py-1 rounded text-xs font-mono surface-inset text-slate-300 hover:text-white border border-white/[0.06]">← PREV</button>
+            <span id="slideIndicator" class="text-xs font-mono font-bold text-brand px-2">SLIDE 1 OF 5</span>
+            <button id="btnNextSlide" class="px-3 py-1 rounded text-xs font-mono surface-inset text-slate-300 hover:text-white border border-white/[0.06]">NEXT →</button>
           </div>
 
           <div class="flex items-center gap-3">
             <div class="flex items-center gap-1.5 text-xs font-mono">
-              <span class="text-slate-400">Pitch Timer:</span>
-              <span id="pitchTimer" class="font-bold text-emerald-400">03:00</span>
+              <span class="text-slate-500">SESSION TIMER:</span>
+              <span id="pitchTimer" class="font-bold text-white">03:00</span>
             </div>
-            <button id="btnToggleTimer" class="px-3 py-1 rounded-lg text-xs font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 hover:bg-emerald-500/30">Start Timer</button>
-            <button id="btnResetTimer" class="px-2 py-1 rounded-lg text-xs font-semibold text-slate-400 hover:text-white">Reset</button>
+            <button id="btnToggleTimer" class="px-2.5 py-1 rounded text-xs font-mono bg-white text-slate-950 font-semibold hover:bg-slate-200">Start Timer</button>
+            <button id="btnResetTimer" class="px-2 py-1 rounded text-xs font-mono text-slate-500 hover:text-slate-300">Reset</button>
           </div>
         </div>
 
-        <!-- Dynamic Slide Content Area -->
-        <div id="slideViewport" class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 min-h-[300px] flex flex-col justify-between">
-          <!-- Slide content injected here -->
-        </div>
-
+        <div id="slideViewport" class="p-8 rounded surface-inset border border-white/[0.06] min-h-[260px] flex flex-col justify-between"></div>
       </div>
 
-      <!-- Business Model Canvas (BMC) Section -->
-      <div class="pt-6 border-t border-slate-800 space-y-4">
-        <h4 class="text-lg font-bold text-white flex items-center gap-2">
-          <svg class="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-          Business Model Canvas (Required Deliverable)
-        </h4>
+      <!-- Business Model Canvas (BMC Table) -->
+      <div class="pt-6 border-t border-white/[0.08] space-y-4">
+        <div class="flex items-center justify-between">
+          <h4 class="font-display text-base font-bold text-white">Business Model Canvas (Required Deliverable)</h4>
+          <span class="text-xs font-mono text-slate-500">9-Block Strategic Architecture</span>
+        </div>
 
-        <div class="bmc-grid text-xs">
-          <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 space-y-1">
-            <span class="font-bold text-emerald-400 block uppercase">Key Partners</span>
-            <p class="text-slate-400 leading-relaxed">• TDRA & Cybersecurity Council<br>• UAE PASS Identity Infrastructure<br>• Telecom Providers (e& / du)<br>• Financial Regulators (CBUAE, SCA)</p>
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-3 text-xs">
+          <div class="p-4 rounded surface-inset border border-white/[0.06] space-y-2">
+            <span class="font-mono font-bold text-brand block uppercase">Key Partners</span>
+            <p class="text-slate-400 font-body leading-relaxed">• TDRA & Cybersecurity Council<br>• UAE PASS Authority<br>• Telecom Providers (e& / du)<br>• Regulators (CBUAE / SCA)</p>
           </div>
-          <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 space-y-1">
-            <span class="font-bold text-cyan-400 block uppercase">Key Activities</span>
-            <p class="text-slate-400 leading-relaxed">• AI Threat Modeling & NLP Scam Detection<br>• Automated Incident Playbook Execution<br>• Bayanat Open Data Telemetry Feed<br>• Citizen Safety Outreach</p>
+          <div class="p-4 rounded surface-inset border border-white/[0.06] space-y-2">
+            <span class="font-mono font-bold text-brand block uppercase">Key Activities</span>
+            <p class="text-slate-400 font-body leading-relaxed">• AI Threat Modeling & NLP Detection<br>• Sub-second Failover Orchestration<br>• Bayanat Open Data Feed Ingestion<br>• Citizen Safety Drills</p>
           </div>
-          <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 space-y-1">
-            <span class="font-bold text-emerald-400 block uppercase">Value Propositions</span>
-            <p class="text-slate-400 leading-relaxed">• Uncompromised Digital Trust in Gov Services<br>• Sub-second Autonomous Incident Mitigation<br>• Zero-friction citizen phishing verification<br>• Full compliance with UAE 2031 Cyber Strategy</p>
+          <div class="p-4 rounded surface-inset border border-white/[0.06] space-y-2">
+            <span class="font-mono font-bold text-brand block uppercase">Value Propositions</span>
+            <p class="text-slate-400 font-body leading-relaxed">• 100% Digital Service Continuity<br>• Zero-friction scam verification<br>• Sub-1.5s Autonomous Mitigation<br>• Compliant with UAE 2031 Vision</p>
           </div>
-          <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 space-y-1">
-            <span class="font-bold text-cyan-400 block uppercase">Customer Relationships</span>
-            <p class="text-slate-400 leading-relaxed">• Transparent real-time public confidence<br>• Automated community defense reporting<br>• Institutional SLA with Government Bodies</p>
+          <div class="p-4 rounded surface-inset border border-white/[0.06] space-y-2">
+            <span class="font-mono font-bold text-brand block uppercase">Relationships</span>
+            <p class="text-slate-400 font-body leading-relaxed">• Transparent National Dashboard<br>• Community Incident Watch<br>• Strict Government SLAs</p>
           </div>
-          <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 space-y-1">
-            <span class="font-bold text-emerald-400 block uppercase">Customer Segments</span>
-            <p class="text-slate-400 leading-relaxed">• UAE Citizens & Residents<br>• Digital Government Entities (TAMM, DubaiNow)<br>• Critical Infrastructure Operators<br>• SMEs and Financial Institutions</p>
+          <div class="p-4 rounded surface-inset border border-white/[0.06] space-y-2">
+            <span class="font-mono font-bold text-brand block uppercase">Customer Segments</span>
+            <p class="text-slate-400 font-body leading-relaxed">• 10M+ UAE Citizens & Residents<br>• Government Portals (TAMM, DubaiNow)<br>• Critical Operators & Utilities<br>• SMEs and Banking Institutions</p>
           </div>
-          <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 space-y-1 col-span-2">
-            <span class="font-bold text-amber-400 block uppercase">Cost Structure</span>
-            <p class="text-slate-400 leading-relaxed">• Sovereign cloud microVM orchestration & Anycast scrubbing<br>• AI Model training and threat signature maintenance<br>• Compliance audits and cryptographic key management</p>
+
+          <div class="p-4 rounded surface-inset border border-white/[0.06] space-y-2 md:col-span-2">
+            <span class="font-mono font-bold text-signalWarn block uppercase">Cost Structure</span>
+            <p class="text-slate-400 font-body leading-relaxed">• Sovereign cloud microVM clustering & scrubbing<br>• Continuous fine-tuning of localized Arabic/English NLP models<br>• Cryptographic audit & third-party red-teaming</p>
           </div>
-          <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 space-y-1 col-span-3">
-            <span class="font-bold text-green-400 block uppercase">Revenue / Value Streams</span>
-            <p class="text-slate-400 leading-relaxed">• Government National Security Infrastructure Adoption<br>• Enterprise / SME Cyber-Resilience SaaS subscription<br>• Preserved economic value (deflecting multi-million AED fraud and downtime)</p>
+          <div class="p-4 rounded surface-inset border border-white/[0.06] space-y-2 md:col-span-3">
+            <span class="font-mono font-bold text-brand block uppercase">Economic Preservation & Value</span>
+            <p class="text-slate-400 font-body leading-relaxed">• Deflecting estimated AED 450M+ in fraudulent transfers, ransomware downtime, and credentials theft<br>• SME Cyber Resilience SaaS tier subscription<br>• National Critical Infrastructure security license</p>
           </div>
         </div>
       </div>
@@ -581,18 +594,12 @@
     </div>
   </div>
 
-  <!-- Footer -->
-  <footer class="border-t border-slate-800/80 bg-slate-950 py-6 mt-12 text-center text-xs text-slate-500">
-    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-      <div>
-        <span class="font-semibold text-slate-300">CyberTrust Nation</span> — Built for UAE Hackathon 2026
-      </div>
-      <div>
-        Theme 4: <span class="text-emerald-400">Digital Trust & Cyber-Secure Nation</span>
-      </div>
-      <div>
-        Continuous Service Resilience & Public Awareness
-      </div>
+  <!-- Minimalist Architectural Footer -->
+  <footer class="border-t border-white/[0.06] bg-canvas py-8 mt-16 text-xs text-slate-500 font-mono">
+    <div class="max-w-[1440px] mx-auto px-6 lg:px-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>CyberTrust Nation — UAE Hackathon 2026</div>
+      <div>Theme 4: Digital Trust & Cyber-Secure Nation</div>
+      <div>Telemetry Source: Bayanat.ae & TDRA</div>
     </div>
   </footer>
 
