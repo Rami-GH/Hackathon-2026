@@ -1,7 +1,7 @@
-# CyberTrust Nation (AmanNation) 🛡️🇦🇪
-### UAE Hackathon 2026 — Theme 4: Digital Trust & Cyber-Secure Nation
+# AegisOS 🛡️
+### Autonomous Digital Verification & Public Trust Architecture
 
-![CyberTrust Nation Architecture](amannation-architecture.jpg)
+![AegisOS Architecture](amannation-architecture.jpg)
 
 > **"This theme focuses on strengthening trust in digital government services through robust cybersecurity, privacy protection, and resilient digital infrastructure. Solutions should promote public awareness of cyber safety and enhance resilience against large-scale cyber incidents, ensuring continuity, reliability, and confidence in digital services."**
 
